@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
         glue = "stepsDefinitions",
         tags  = "@success",
         snippets = CucumberOptions.SnippetType.CAMELCASE,
-        dryRun = false,
+        dryRun = true,
         monochrome = false)
 
 public class RunnerTest {

@@ -1,9 +1,9 @@
-Feature: Automobile Insurance Send email.
-  As an Tricentis user
-  I want to entry on Automobile Insurance page
-  To use the system functions to fill the forms and send a email
+Feature: Send email.
+  A Tricentis user wants to send an email.
 
 @success
-  Scenario: Send email success
-    Given I am on Automobile Insurance page
-    When I fill the blanks correctly
+ Scenario: Send email successfully
+    Given the Automobile Insurance is displayed
+    When the user fills in all tabs correctly
+    And the user sends the email
+    Then the success message appears
