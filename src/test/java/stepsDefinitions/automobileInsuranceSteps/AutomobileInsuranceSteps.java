@@ -14,11 +14,6 @@ public class AutomobileInsuranceSteps extends BaseTest {
     WebDriver driver = getDriver();
     AutomobileInsurancePage automobileInsurancePage = new AutomobileInsurancePage(driver);
 
-
-
-
-
-
     @Given("the Automobile Insurance is displayed")
     public void theAutomobileInsuranceIsDisplayed() {
         driver.get(baseUrl());
@@ -54,6 +49,15 @@ public class AutomobileInsuranceSteps extends BaseTest {
         automobileInsurancePage.setCountry("Brazil");
         automobileInsurancePage.setZipCode(258634);
         automobileInsurancePage.setCity("Recife");
+        automobileInsurancePage.setOccupation("Farmer");
+        automobileInsurancePage.setHobbies("Bungee Jumping");
+        automobileInsurancePage.setHobbies("Skydiving");
+        automobileInsurancePage.setWebsite("www.teste");
+        automobileInsurancePage.sendScreenShot();
+        Assert.assertEquals("0",automobileInsurancePage.getCountInsurantDate());
+
+
+
 
 
 

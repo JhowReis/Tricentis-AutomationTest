@@ -4,15 +4,16 @@ import io.cucumber.java.bs.I;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 public class AutomobileInsurancePage  {
 
@@ -21,7 +22,9 @@ public class AutomobileInsurancePage  {
     WebDriver driver;
     DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     Date date = new Date();
-//    ********** SELECTORS **********
+
+
+    //    ********** SELECTORS **********
     private By txt_cylinder = By.id("cylindercapacity");
     private By txt_engine = By.id("engineperformance");
     private By date_manufacture = By.id("dateofmanufacture");
@@ -41,6 +44,14 @@ public class AutomobileInsurancePage  {
     private By txt_streetAddress = By.id("streetaddress");
     private By txt_zipCode = By.id("zipcode");
     private By txt_city = By.id("city");
+    private By chk_speeding = By.xpath("//*[@id=\"insurance-form\"]/div/section[2]/div[10]/p/label[1]/span");
+    private By chk_bungeeJumping = By.xpath("//*[@id=\"insurance-form\"]/div/section[2]/div[10]/p/label[2]/span");
+    private By chk_cliffDiving = By.xpath("//*[@id=\"insurance-form\"]/div/section[2]/div[10]/p/label[3]/span");
+    private By chk_skyDiving = By.xpath("//*[@id=\"insurance-form\"]/div/section[2]/div[10]/p/label[4]/span");
+    private By chk_other = By.xpath("//*[@id=\"insurance-form\"]/div/section[2]/div[10]/p/label[5]/span");
+    private By txt_website = By.id("website");
+    private By file_image = By.className("ideal-file-filename");
+    private By countInsurantData = By.cssSelector("#enterinsurantdata > span");
 
 
     public AutomobileInsurancePage(WebDriver driver){
@@ -70,6 +81,12 @@ public class AutomobileInsurancePage  {
         return dateFormat.format(date);
 
     }
+    public void scroll(){
+        new Actions(driver)
+                .scrollByAmount(0,600)
+                .perform();
+    }
+
 
 
     //  ************** ENTER VEHICLE DATA METHODS ********************
@@ -159,7 +176,44 @@ public class AutomobileInsurancePage  {
     public void setCity(String city){
         driver.findElement(txt_city).sendKeys(city);
     }
+    public void setOccupation(String occupation){
+        driver.findElement(optionValueTag(occupation)).click();
+    }
+    public void setHobbies(String hobbies){
+        String hb = hobbies.toLowerCase();
+        if (hb.equals("speeding")){
+            driver.findElement(chk_speeding).click();
+        }
+        else if (hb.equals("bungee jumping")){
+            driver.findElement(chk_bungeeJumping).click();
+        }
+        else if (hb.equals("cliff diving")){
+            driver.findElement(chk_cliffDiving).click();
+        }
+        else if (hb.equals("skydiving")){
+            driver.findElement(chk_skyDiving).click();
+        }
+        else {
+            driver.findElement(chk_other).click();
+        }
+    }
 
+    public void setWebsite(String website){
+        driver.findElement(txt_website).sendKeys(website);
+    }
+    public void sendScreenShot(){
+//        File file = new File("target/files/image.jpg");
+//        driver.findElement(file_image).sendKeys(file.getAbsolutePath());
+
+        WebElement arquivo1 = driver.findElement(file_image);
+        File file = new File("target/files/image.jpg");
+        arquivo1.sendKeys(file.getAbsolutePath());
+    }
+
+    public String getCountInsurantDate(){
+        return driver.findElement(countInsurantData).getText();
+
+    }
 
 
 
