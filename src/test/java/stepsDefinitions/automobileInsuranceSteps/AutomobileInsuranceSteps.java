@@ -42,8 +42,19 @@ public class AutomobileInsuranceSteps extends BaseTest {
        automobileInsurancePage.setLicensePlateNumber("kjl123");
        automobileInsurancePage.setAnnualMileage(350);
        Assert.assertEquals("0",automobileInsurancePage.counterZero());
-
        automobileInsurancePage.clickNext();
+
+//       **********    ENTER INSURANT DATA **************
+
+        automobileInsurancePage.setFirsName("Jonathan");
+        automobileInsurancePage.setLastName("Reis");
+        automobileInsurancePage.setDateBirth();
+        automobileInsurancePage.selectGender("Male");
+        automobileInsurancePage.setStreetAddress("Avenida");
+        automobileInsurancePage.setCountry("Brazil");
+        automobileInsurancePage.setZipCode(258634);
+        automobileInsurancePage.setCity("Recife");
+
 
 
 
