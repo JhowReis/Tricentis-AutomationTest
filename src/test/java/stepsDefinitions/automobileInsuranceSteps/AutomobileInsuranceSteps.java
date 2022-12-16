@@ -67,6 +67,14 @@ public class AutomobileInsuranceSteps extends BaseTest {
         Assert.assertEquals("0",automobileInsurancePage.getCountproductData());
         automobileInsurancePage.clickNetPriceOption();
 
+        //       **********    ENTER PRODUCT DATA **************
+        automobileInsurancePage.setPriceOption("Gold");
+        automobileInsurancePage.clickNextSendQuote();
+
+
+        //       **********    SEND QUOTE   **************
+
+
 
 
 

@@ -54,13 +54,17 @@ public class AutomobileInsurancePage  {
     private By countInsurantData = By.cssSelector("#enterinsurantdata > span");
     private By countProducData = By.cssSelector("#enterproductdata > span");
     private By btn_nxtProductData = By.id("nextenterproductdata");
-
     private By btn_nxtPriceOption = By.id("nextselectpriceoption");
+    private By btn_nxtSendQuote = By.id("nextsendquote");
     private By date_startDate = By.id("startdate");
     private By chk_euroProtection = By.xpath("//*[@id=\"insurance-form\"]/div/section[3]/div[5]/p/label[1]/span");
     private By chk_legalDefense = By.xpath("//*[@id=\"insurance-form\"]/div/section[3]/div[5]/p/label[2]/span");
     private By chk_yes = By.xpath("//*[@id=\"courtesycar\"]/option[3]");
     private By chk_no = By.xpath("//*[@id=\"courtesycar\"]/option[2]");
+    private By chk_silver = By.xpath("//*[@id=\"priceTable\"]/tfoot/tr/th[2]/label[1]/span");
+    private By chk_gold = By.xpath("//*[@id=\"priceTable\"]/tfoot/tr/th[2]/label[2]/span");
+    private By chk_platinum = By.xpath("//*[@id=\"priceTable\"]/tfoot/tr/th[2]/label[3]/span");
+    private By chk_ultimate = By.xpath("//*[@id=\"priceTable\"]/tfoot/tr/th[2]/label[4]/span");
 
     public AutomobileInsurancePage(WebDriver driver){
         this.driver = driver;
@@ -270,6 +274,27 @@ public class AutomobileInsurancePage  {
     }
     public String getCountproductData(){
         return driver.findElement(countProducData).getText();
+    }
+
+    public void setPriceOption(String option){
+        String op = option.toLowerCase();
+        if (op.equals("silver")){
+            driver.findElement(chk_silver).click();
+        }
+        else if (op.equals("gold")){
+            driver.findElement(chk_gold).click();
+        }
+        else if (op.equals("platinum")){
+            driver.findElement(chk_platinum).click();
+        }
+        else {
+            driver.findElement(chk_ultimate).click();
+        }
+    }
+    public void clickNextSendQuote() {
+        new WebDriverWait(driver, Duration.ofSeconds(30))
+                .until(ExpectedConditions.elementToBeClickable(btn_nxtSendQuote));
+        driver.findElement(btn_nxtSendQuote).click();
     }
 
 }
