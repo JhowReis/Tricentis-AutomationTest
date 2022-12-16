@@ -1,9 +1,17 @@
+@sendEmail
 Feature: Send email.
   A Tricentis user wants to send an email.
 
-@success
- Scenario: Send email successfully
+  Background:
     Given the Automobile Insurance is displayed
-    When the user fills in all tabs correctly
-#    And the user sends the email
-#    Then the success message appears
+
+
+  @success
+  Scenario: Send email successfully
+  When the user fills Enter Vehicle Data tab
+  And the user fills Enter Insurance tab
+  And the user fills Enter Product Data tab
+  And the user fills Select Price Options tab
+  And the user fills Send Quote tab
+  And the user sends the email
+  Then the success message appears
