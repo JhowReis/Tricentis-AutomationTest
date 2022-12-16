@@ -35,7 +35,7 @@ public class AutomobileInsurancePage  {
     private By txt_listPrice = By.id("listprice");
     private By txt_licensePlateNumber = By.id("licenseplatenumber");
     private By txt_annualMileage = By.id("annualmileage");
-    private By btn_next = By.id("nextenterinsurantdata");
+    private By btn_next = By.className("next");
     private By txt_firstName = By.id("firstname");
     private By txt_lastName = By.id("lastname");
     private By date_birthDate = By.id("birthdate");
@@ -52,7 +52,15 @@ public class AutomobileInsurancePage  {
     private By txt_website = By.id("website");
     private By file_image = By.className("ideal-file-filename");
     private By countInsurantData = By.cssSelector("#enterinsurantdata > span");
+    private By countProducData = By.cssSelector("#enterproductdata > span");
+    private By btn_nxtProductData = By.id("nextenterproductdata");
 
+    private By btn_nxtPriceOption = By.id("nextselectpriceoption");
+    private By date_startDate = By.id("startdate");
+    private By chk_euroProtection = By.xpath("//*[@id=\"insurance-form\"]/div/section[3]/div[5]/p/label[1]/span");
+    private By chk_legalDefense = By.xpath("//*[@id=\"insurance-form\"]/div/section[3]/div[5]/p/label[2]/span");
+    private By chk_yes = By.xpath("//*[@id=\"courtesycar\"]/option[3]");
+    private By chk_no = By.xpath("//*[@id=\"courtesycar\"]/option[2]");
 
     public AutomobileInsurancePage(WebDriver driver){
         this.driver = driver;
@@ -68,6 +76,7 @@ public class AutomobileInsurancePage  {
         System.out.println("elemento é presente na pagina" + presence);
     }
 
+
     //  **********************  DATE METHODS  ********************************
     private String getDateTime() {
         return dateFormat.format(date);
@@ -76,11 +85,21 @@ public class AutomobileInsurancePage  {
     public String setDateBirthDate() {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        cal.add(Calendar.YEAR, -20);
+        cal.add(Calendar.YEAR, -18);
         date = cal.getTime();
         return dateFormat.format(date);
-
     }
+
+    public String startDate() {
+        Date date = new Date();
+        Calendar cale = Calendar.getInstance();
+        cale.setTime(date);
+        cale.add(Calendar.MONTH, 2);
+        date = cale.getTime();
+        return dateFormat.format(date);
+    }
+
+
     public void scroll(){
         new Actions(driver)
                 .scrollByAmount(0,600)
@@ -147,6 +166,7 @@ public class AutomobileInsurancePage  {
     }
 
     //  ************** ENTER INSURANT DATA METHODS ********************
+
     public void setFirsName(String firstName){
         driver.findElement(txt_firstName).sendKeys(firstName);
     }
@@ -155,7 +175,6 @@ public class AutomobileInsurancePage  {
     }
     public void setDateBirth(){
         driver.findElement(date_birthDate).sendKeys(setDateBirthDate().toString());
-
     }
     public void selectGender(String gender)  {
         if (gender.equals("Male")){
@@ -197,40 +216,65 @@ public class AutomobileInsurancePage  {
             driver.findElement(chk_other).click();
         }
     }
-
     public void setWebsite(String website){
         driver.findElement(txt_website).sendKeys(website);
     }
     public void sendScreenShot(){
-//        File file = new File("target/files/image.jpg");
-//        driver.findElement(file_image).sendKeys(file.getAbsolutePath());
-
         WebElement arquivo1 = driver.findElement(file_image);
         File file = new File("target/files/image.jpg");
         arquivo1.sendKeys(file.getAbsolutePath());
     }
-
     public String getCountInsurantDate(){
         return driver.findElement(countInsurantData).getText();
-
+    }
+    public void clickNextPrdDataBtn(){
+        driver.findElement(btn_nxtProductData).click();
     }
 
+    //  ************** ENTER PRODUCT DATA METHODS ********************
 
+    public void setStartDate(){
+        driver.findElement(date_startDate).sendKeys(startDate());
+    }
+    public void setInsuranceSum(Integer value){
+        driver.findElement(optionValueTag(value.toString())).click();
+    }
+    public void setMeritRating(String merit){
+        driver.findElement(optionValueTag(merit)).click();
+    }
+    public void setDamageInsurance(String damageInsurance){
+        driver.findElement(optionValueTag(damageInsurance)).click();
+    }
 
+    public void setOptionalProducts(String product){
+        String p = product.toLowerCase();
+        if (p.equals("euro protection")){
+            driver.findElement(chk_euroProtection).click();
+        }
+        else {
+            driver.findElement(chk_legalDefense).click();
+        }
+    }
+    public void setCourtesyCar(String options){
+        String op = options.toLowerCase();
+        if (op.equals("yes")){
+            driver.findElement(chk_yes).click();
+        }
+        if (op.equals("no")){
+            driver.findElement(chk_no).click();
+        }
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void clickNetPriceOption() {
+        driver.findElement(btn_nxtPriceOption).click();
+    }
+    public String getCountproductData(){
+        return driver.findElement(countProducData).getText();
+    }
 
 }
+
+
+
+
 

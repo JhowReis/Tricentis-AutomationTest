@@ -53,8 +53,21 @@ public class AutomobileInsuranceSteps extends BaseTest {
         automobileInsurancePage.setHobbies("Bungee Jumping");
         automobileInsurancePage.setHobbies("Skydiving");
         automobileInsurancePage.setWebsite("www.teste");
-        automobileInsurancePage.sendScreenShot();
         Assert.assertEquals("0",automobileInsurancePage.getCountInsurantDate());
+        automobileInsurancePage.clickNextPrdDataBtn();
+
+        //       **********    ENTER PRODUCT DATA **************
+
+        automobileInsurancePage.setStartDate();
+        automobileInsurancePage.setInsuranceSum(3000000);
+        automobileInsurancePage.setMeritRating("Malus 14");
+        automobileInsurancePage.setDamageInsurance("No Coverage");
+        automobileInsurancePage.setOptionalProducts("Legal Defense Insurance");
+        automobileInsurancePage.setCourtesyCar("yes");
+        Assert.assertEquals("0",automobileInsurancePage.getCountproductData());
+        automobileInsurancePage.clickNetPriceOption();
+
+
 
 
 
