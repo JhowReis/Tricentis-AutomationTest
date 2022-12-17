@@ -1,18 +1,18 @@
-package stepsDefinitions.automobileInsuranceSteps;
+package stepsDefinitions;
 
 import core.BaseTest;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import pages.automobileInsurancePage.AutomobileInsurancePage;
+import pages.AutomobileInsurancePage;
 import static core.DriverFactory.getDriver;
 
 public class AutomobileInsuranceSteps extends BaseTest {
     WebDriver driver = getDriver();
     AutomobileInsurancePage automobileInsurancePage = new AutomobileInsurancePage(driver);
 
-    @Given("the Automobile Insurance is displayed")
-    public void theAutomobileInsuranceIsDisplayed() {
+    @Given("the Automobile Insurance Page is displayed")
+    public void theAutomobileInsurancePageIsDisplayed() {
         driver.get(baseUrl());
     }
 
@@ -69,8 +69,8 @@ public class AutomobileInsuranceSteps extends BaseTest {
     @When("the user fills Select Price Options tab")
     public void theUserFillsSelectPriceOptionsTab() {
         automobileInsurancePage.setPriceOption("Gold");
+        Assert.assertEquals("0",automobileInsurancePage.getCountPriceOption());
         automobileInsurancePage.clickNextSendQuote();
-        Assert.assertEquals("0",automobileInsurancePage.getCountSendQuote());
     }
     @When("the user fills Send Quote tab")
     public void theUserFillsSendQuoteTab() {
@@ -80,6 +80,8 @@ public class AutomobileInsuranceSteps extends BaseTest {
         automobileInsurancePage.setPassword("Test123");
         automobileInsurancePage.setConfirmPassword("Test123");
         automobileInsurancePage.setComments("success email test");
+
+        Assert.assertEquals("0", automobileInsurancePage.getSendQuoteCount());
     }
     @When("the user sends the email")
     public void theUserSendsTheEmail() {

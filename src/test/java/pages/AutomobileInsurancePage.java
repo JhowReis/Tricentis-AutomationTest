@@ -1,4 +1,4 @@
-package pages.automobileInsurancePage;
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,8 +14,6 @@ import java.time.Duration;
 import java.util.*;
 
 public class AutomobileInsurancePage {
-
-//    EVERY LOCATOR SHOULD BE HERE
 
     WebDriver driver;
     DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -51,7 +49,9 @@ public class AutomobileInsurancePage {
     private By file_image = By.className("ideal-file-filename");
     private By countInsurantData = By.cssSelector("#enterinsurantdata > span");
     private By countProducData = By.cssSelector("#enterproductdata > span");
-    private By countSendQuote = By.cssSelector("#selectpriceoption > span");
+    private By countPriceOption = By.cssSelector("#selectpriceoption > span");
+    private By countSendQuote = By.cssSelector("#sendquote > span");
+
     private By btn_nxtProductData = By.id("nextenterproductdata");
     private By btn_nxtPriceOption = By.id("nextselectpriceoption");
     private By btn_nxtSendQuote = By.id("nextsendquote");
@@ -72,7 +72,9 @@ public class AutomobileInsurancePage {
     private By txt_comments = By.id("Comments");
     private By btn_send = By.id("sendemail");
     private By successMessage = By.tagName("h2");
-    private By make = By.id("make");
+
+    private By count = By.cssSelector("span.counter");
+
 
 
     public AutomobileInsurancePage(WebDriver driver) {
@@ -85,7 +87,7 @@ public class AutomobileInsurancePage {
     }
 
     public void waitingPresenceOfElement(By locator) {
-        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.presenceOfElementLocated(locator));
+        new WebDriverWait(driver, Duration.ofSeconds(40)).until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
     public void waitingElementToBeClickable(By locator) {
@@ -98,12 +100,14 @@ public class AutomobileInsurancePage {
                 .perform();
     }
 
-
     //  **********************  DATE METHODS  ********************************
+
+//    return the current date
     private String getDateTime() {
         return dateFormat.format(date);
     }
 
+//    return the current date eighteen years ago
     public String setDateBirthDate() {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
@@ -112,6 +116,7 @@ public class AutomobileInsurancePage {
         return dateFormat.format(date);
     }
 
+    //return the current date two months ahead
     public String startDate() {
         Date date = new Date();
         Calendar cale = Calendar.getInstance();
@@ -205,6 +210,7 @@ public class AutomobileInsurancePage {
     public String counterZero() {
         return driver.findElement(By.className("zero")).getText();
     }
+
 
     //  ************** ENTER INSURANT DATA METHODS ********************
 
@@ -373,9 +379,9 @@ public class AutomobileInsurancePage {
         driver.findElement(btn_nxtSendQuote).click();
     }
 
-    public String getCountSendQuote() {
-        waitingPresenceOfElement(countSendQuote);
-        return driver.findElement(countSendQuote).getText();
+    public String getCountPriceOption() {
+        waitingPresenceOfElement(countPriceOption);
+        return driver.findElement(countPriceOption).getText();
     }
 
 
@@ -413,6 +419,11 @@ public class AutomobileInsurancePage {
     public void clickSend() {
         waitingElementToBeClickable(btn_send);
         driver.findElement(btn_send).click();
+    }
+
+    public String getSendQuoteCount(){
+        waitingPresenceOfElement(countSendQuote);
+        return driver.findElement(countSendQuote).getText();
     }
 
 
